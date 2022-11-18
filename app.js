@@ -1,4 +1,5 @@
 const express = require("express")
+require("express-async-errors")
 const morgan = require("morgan")
 const { urlencoded } = require("body-parser")
 const {
@@ -8,15 +9,13 @@ const {
 } = require("./middlewares/errHandler")
 const productsRouter = require("./routes/products")
 
-
 const app = express()
 
 app.use(express.json())
 app.use(urlencoded({ extended: false }))
 app.use(morgan("dev"))
 
-
-app.get("/", (req, res) =>{
+app.get("/", (req, res) => {
   res.send("<h1>Store API</h1><a href='/api/v1/products'>products route</a>")
 })
 
