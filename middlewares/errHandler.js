@@ -1,4 +1,6 @@
-const { CustomAPIError } = require("../errors/custom-error")
+const { CustomAPIError } = require("../errors")
+const { StatusCodes } = require("http-status-codes")
+
 const errorLogger = (err, req, res, next) => {
   console.error("\x1b[31m", err)
   next(err)
@@ -12,7 +14,7 @@ const errorResponder = (err, req, res, next) => {
 }
 
 const invalidPathHandler = (err, req, res, next) => {
-  res.status(500).send({
+  res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
     message: `${req.originalUrl} is not a valid path`
   })
 }
